@@ -8,28 +8,32 @@
      <!-- Include -->
     {% include "base/navbar.html" %}
 
-    <div>
-        <h1>Home Page with Extends </h1>
+    <div class="container">
+        <div>
+            <h1>Study Talk  </h1>
 
+            <a href="{% url 'create-room' %}">Create Room</a>
 
-    <div>
-            <div>
-                {% for r in room %}
-                    <span>@{{r.host.username}}</span>
-                    <h4>{{r.id}}.<a href="/rooms/{{r.id}}">{{r.name}}</a></h4>
-                    <p>{{r.description}}</p>
+            <hr>
 
-                    <small>{{r.topic.name}}</small>
-                    <hr>
+        <div>
+                <div>
+                    {% for r in room %}
+                            <a href="{% url 'update-room' r.id %}">Edit</a>
+                            <a href="{% url 'delete-room' r.id %}">Delete</a>
+                        <span>@{{r.host.username}}</span> 
+                        <h4>{{r.id}}.<a href="{% url 'room' r.id %}">{{r.name}}</a></h4>
+                        <p>{{r.description}}</p>
+    
+                        <small>{{r.topic.name}}</small>
+                        <hr>
+    
+                    {% endfor %}
+                </div>
+    
+        </div>
 
-                {% endfor %}
-            </div>
-
-    </div>
-
-
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore deserunt in aut facere, aliquam repellendus exercitationem natus illum. Nisi ut quo fuga accusamus ipsum? Tempora voluptates labore enim esse optio.</p>
-
+        </div>
     </div>
 
 {% endblock content %}

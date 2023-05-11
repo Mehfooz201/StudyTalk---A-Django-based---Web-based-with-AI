@@ -18,7 +18,11 @@ class Room(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)    
+    created = models.DateTimeField(auto_now_add=True)  
+
+    #Most Updated and Created Rooms here. Most recents 
+    class Meta:
+        ordering = ['-updated', '-created']  
 
     def __str__(self):
         return str(self.name)
