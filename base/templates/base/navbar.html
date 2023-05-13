@@ -1,8 +1,12 @@
 
     <div class="container my-2">
-
         <a href="/">Logo</a>
-
+    </div>
+    
+    <div>
+        <form action="{% url 'home' %}" method="GET">
+            <input type="text" name="q" placeholder="Search Rooms...">
+        </form>
     </div>
     
     <hr>
