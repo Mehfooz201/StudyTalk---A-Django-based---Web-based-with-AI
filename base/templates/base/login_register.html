@@ -1,0 +1,77 @@
+{% extends 'base/main.html' %}
+{% block title %}
+    Login
+{% endblock title %}
+
+
+
+{% block content %}
+    
+
+
+<div class="container my-5">
+
+
+    {% if page == 'login' %}
+    <div>
+        <form action='', method='post'>
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Username</label>
+                <input type="text" class="form-control" name='username' placeholder='Enter email addres'>
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" name='password' placeholder='Enter Password'>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Login</button>
+              <div class='my-3'>
+                <p>Haven't signed up yet ?</p>
+                <a href="{% url 'register' %}" class='text-decoration-none'>Register</a>
+              </div>
+
+          </form>
+
+    </div>
+    
+
+
+    {% comment %} Register {% endcomment %}
+    {% else %}
+    <div>
+        <form action='', method='post'>
+            {% csrf_token %}
+
+            {% comment %} <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Username</label>
+                <input type="text" class="form-control" name='username' placeholder='Enter email addres'>
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" name='password' placeholder='Enter Password'>
+              </div> {% endcomment %}
+              
+              {{form.as_p}}
+              <button type="submit" class="btn btn-primary">Register</button> 
+
+              <div class='my-3'>
+                <p>Already signed up ?</p>
+                <a href="{% url 'login' %}" class='text-decoration-none'>Login</a>
+              </div>
+
+          </form>
+          
+
+    </div>
+
+
+    {% endif %}
+
+</div>
+
+
+{% endblock content %}

@@ -12,10 +12,8 @@
             grid-template-columns: 1fr  3fr;
         }
     </style>
-     <!-- Include -->
-    {% include "base/navbar.html" %}
-
-    <div class="container home-container">
+ 
+    <div class="container home-container my-4">
         <div>
             <h3>Browse Topics</h3>
             <hr>
@@ -36,13 +34,18 @@
 
         <div>
             <h5>{{room_count}} Room Available</h5>
-            <a href="{% url 'create-room' %}">Create Room</a>  
+            <a href="{% url 'create-room' %}" class='my-4'>Create Room</a>  
+            
             <div>
                 {% for r in room %}
                 <div>
-                    <a href="{% url 'update-room' r.id %}">Edit</a>
-                    <a href="{% url 'delete-room' r.id %}">Delete</a>
+                    {% if request.user == r.host %}
+                        <a href="{% url 'update-room' r.id %}">Edit</a>
+                        <a href="{% url 'delete-room' r.id %}">Delete</a>
+                    {% endif %}
+
                     <span>@{{r.host.username}}</span> 
+                    {% comment %} <span>@{{request.user}}</span>  {% endcomment %}
                     <h4>{{r.id}}.<a href="{% url 'room' r.id %}">{{r.name}}</a></h4>
                     <p>{{r.description}}</p>
 

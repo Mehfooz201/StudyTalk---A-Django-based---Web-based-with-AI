@@ -1,14 +1,54 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    
+    <div class="container">
+      <a class="navbar-brand" href="/">StudyTalk</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
 
-    <div class="container my-2">
-        <a href="/">Logo</a>
-    </div>
-    
-    <div>
-        <form action="{% url 'home' %}" method="GET">
-            <input type="text" name="q" placeholder="Search Rooms...">
+          {% if request.user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+
+          {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login or Register</a>
+            </li>
+          {% endif %}
+          
+          
+        </ul>
+
+        <form class="d-flex" action="{% url 'home' %}" method="GET">
+            <input class="form-control me-2" type="search" name="q" placeholder="Search Rooms..." aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
+
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">
+                {% if request.user.is_authenticated %}
+                    Hello, {{request.user}}
+                {% endif %}
+
+            
+            </a>
+            </li>
+  
+          </ul>
+
+        
+
+      </div>
     </div>
-    
-    <hr>
+  </nav>
 
 
