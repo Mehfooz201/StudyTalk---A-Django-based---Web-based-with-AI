@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 
 from django.db.models import Q
-from .models import Room, Topic
+from .models import Room, Topic, Message
 from .forms import RoomForm
 
 
@@ -65,6 +65,7 @@ def home(request):
         Q(topic__name__icontains=q) |
         Q(name__icontains=q) |
         Q(description__icontains=q) 
+        
         )
     topics = Topic.objects.all()
     room_count = room.count()
@@ -75,8 +76,17 @@ def home(request):
 
 def rooms(request, pk):
     room = Room.objects.get(id=pk)
+    room_messages = room.message_set.all().order_by('-created')
 
-    context = {'room':room}
+    if request.method == 'POST':
+        message = Message.objects.create(
+            user = request.user,
+            room = room,
+            body = request.POST.get('body')
+        )
+        return redirect('room', pk=room.id)
+
+    context = {'room':room, 'room_messages':room_messages}
     return render(request, 'base/room.html', context)
 
 
