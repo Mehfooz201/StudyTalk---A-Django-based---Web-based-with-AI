@@ -1,17 +1,17 @@
 <div>
-    {% for r in room %}
+    {% for room in rooms %}
     <div>
         {% if request.user == r.host %}
-            <a href="{% url 'update-room' r.id %}">Edit</a>
-            <a href="{% url 'delete-room' r.id %}">Delete</a>
+            <a href="{% url 'update-room' room.id %}">Edit</a>
+            <a href="{% url 'delete-room' room.id %}">Delete</a>
         {% endif %}
 
-        <span><a href="{% url 'user-profile' r.host.id %}">@{{r.host.username}}</a></span> 
+        <span><a href="{% url 'user-profile' room.host.id %}">@{{room.host.username}}</a></span> 
         {% comment %} <span>@{{request.user}}</span>  {% endcomment %}
-        <h4>{{r.id}}.<a href="{% url 'room' r.id %}">{{r.name}}</a></h4>
-        <p>{{r.description}}</p>
+        <h4>{{room.id}}.<a href="{% url 'room' room.id %}">{{room.name}}</a></h4>
+        <p>{{room.description}}</p>
 
-        <small>{{r.topic.name}}</small>
+        <small>{{room.topic.name}}</small>
         <hr>
     </div>
     {% endfor %}
