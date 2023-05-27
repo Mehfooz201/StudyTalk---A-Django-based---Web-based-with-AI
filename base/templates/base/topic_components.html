@@ -1,0 +1,20 @@
+
+
+
+<div>
+        <h3>Browse Topics</h3>
+        <hr>
+    
+        <div>                             
+        {% comment %} Filtering with topic name {% endcomment %}
+            <p><a href="{% url 'home' %}">All</a></p>
+        </div>
+
+        {% for topic in topics %}
+          <div>                             
+            {% comment %} Filtering with topic name {% endcomment %}
+            <p><a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a></p>
+          </div>
+        {% endfor %}
+
+    </div>

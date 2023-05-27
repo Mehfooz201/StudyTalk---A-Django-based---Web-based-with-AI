@@ -1,0 +1,29 @@
+{% extends 'base/main.html' %}
+{% block title %}
+    Profile
+{% endblock title %}
+
+
+
+{% block content %}
+    
+ 
+    <div class="container">
+
+        <h2>{{user}}</h2>
+
+        <div>
+            {% include "base/topic_components.html" %}
+        </div>
+
+        <div>
+            
+        </div>
+
+        <div>
+            {% include "base/activity_components.html" %}
+        </div>
+        
+    </div>
+
+{% endblock content %}

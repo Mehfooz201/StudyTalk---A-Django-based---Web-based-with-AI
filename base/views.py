@@ -10,6 +10,19 @@ from .models import Room, Topic, Message
 from .forms import RoomForm
 
 
+
+def userProfile(request, pk):
+    user = User.objects.get(id=pk)
+    rooms = user.room_set.all()
+
+    context = {
+        'user':user,
+        'rooms':rooms
+    }
+    return render(request, 'base/profile.html', context)
+
+
+
 #Login Page
 def loginPage(request):
     page = 'login'
@@ -69,9 +82,13 @@ def home(request):
         )
     topics = Topic.objects.all()
     room_count = room.count()
+    room_messages = Message.objects.filter(Q(room__topic__name__icontains=q) )
+
     context = {'room':room, 
                'topics':topics, 
-               'room_count':room_count}
+               'room_count':room_count,
+               'room_messages':room_messages
+               }
     return render(request, 'base/home.html', context)
 
 def rooms(request, pk):
