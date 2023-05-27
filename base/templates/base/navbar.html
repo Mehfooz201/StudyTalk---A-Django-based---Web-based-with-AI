@@ -1,10 +1,13 @@
+{% load static %}
+
 <header class="header header--loggedIn">
   <div class="container">
     <a href="/" class="header__logo">
-      <img src="assets/logo.svg" />
-      <h1>StudyBuddy</h1>
+      <img src="{% static 'images/logo.svg' %}" />
+      <h1>StudyTalk</h1>
     </a>
-    <form class="header__search">
+
+    <form class="header__search" action="{% url 'home' %}" method="GET">
       <label>
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
           <title>search</title>
@@ -12,24 +15,20 @@
             d="M32 30.586l-10.845-10.845c1.771-2.092 2.845-4.791 2.845-7.741 0-6.617-5.383-12-12-12s-12 5.383-12 12c0 6.617 5.383 12 12 12 2.949 0 5.649-1.074 7.741-2.845l10.845 10.845 1.414-1.414zM12 22c-5.514 0-10-4.486-10-10s4.486-10 10-10c5.514 0 10 4.486 10 10s-4.486 10-10 10z"
           ></path>
         </svg>
-        <input placeholder="Search for rooms..." />
+        <input  name="q" placeholder="Search for rooms..." />
       </label>
     </form>
+
     <nav class="header__menu">
-      <!-- Not Logged In -->
-      <!-- <a href="/login.html">
-        <img src="./assets/avatar.svg" />
-        <p>Login</p>
-      </a> -->
-
+      
+      {% if request.user.is_authenticated %} 
       <!-- Logged In -->
-
       <div class="header__user">
         <a href="profile.html">
           <div class="avatar avatar--medium active">
             <img src="https://randomuser.me/api/portraits/men/37.jpg" />
           </div>
-          <p>John Doe <span>@john_doe</span></p>
+          <p>{{request.user.username}} <span>@{{request.user.username}}</span></p>
         </a>
         <button class="dropdown-button">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
@@ -38,6 +37,15 @@
           </svg>
         </button>
       </div>
+
+      {% else %}
+      <!-- Not Logged In -->
+      <a href="{% url 'login' %}">
+        <img src="{% static 'images/avatar.svg' %}" />
+        <p>Login</p>
+      </a>
+      {% endif %}
+
 
       <div class="dropdown-menu">
         <a href="settings.html" class="dropdown-link"
@@ -49,8 +57,9 @@
           </svg>
           Settings</a
         >
-        <a href="{% url 'login' %}" class="dropdown-link"
-          ><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+        <a href="{% url 'logout' %}" class="dropdown-link"
+          >
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
             <title>sign-out</title>
             <path
               d="M3 0h22c0.553 0 1 0 1 0.553l-0 3.447h-2v-2h-20v28h20v-2h2l0 3.447c0 0.553-0.447 0.553-1 0.553h-22c-0.553 0-1-0.447-1-1v-30c0-0.553 0.447-1 1-1z"
@@ -68,13 +77,3 @@
 
 
 
-
-
-        <!-- <form class="d-flex" action="{% url 'home' %}" method="GET">
-            <input class="form-control me-2" type="search" name="q" placeholder="Search Rooms..." aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-
-       -->
-
-        
