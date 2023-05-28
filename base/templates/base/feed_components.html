@@ -13,12 +13,12 @@
             <span>@{{room.host.username}}</span>
         </a>
 
-       <div>
+       <!-- <div>
             {% if request.user == room.host %}
             <a href="{% url 'update-room' room.id %}" class='btn btn-warning btn-sm'>Edit</a>
             <a href="{% url 'delete-room' room.id %}" class='btn btn-danger btn-sm'>Delete</a>
             {% endif %}
-        </div>
+        </div> -->
 
         <div class="roomListRoom__actions">
             <span>{{room.created|timesince}} ago</span>
