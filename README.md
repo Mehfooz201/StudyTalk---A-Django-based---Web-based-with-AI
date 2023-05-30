@@ -7,7 +7,7 @@ Welcome to StudyTalk, a platform that aims to provide an easy-to-use and intuiti
 To get started with StudyTalk, follow these steps:
 
 ### Usage:
-To use StudyTalk, open a web browser and go to http://localhost:8000/. You should see the StudyTalk homepage. From here, you can create an account, log in, and start using StudyTalk.
+To use StudyTalk, open a web browser and go to http://localhost:8000/.. Will host in fture. Stay conncet. You should see the StudyTalk homepage. From here, you can create an account, log in, and start using StudyTalk.
 
 ### Creating a room:
 To create a room, click on the "Create Room" button on the homepage. Give your room a name and a description, and click "Create Room".
