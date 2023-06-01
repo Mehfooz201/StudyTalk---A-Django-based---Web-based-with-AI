@@ -150,6 +150,7 @@ def updateRoom(request, pk):
     form = RoomForm(instance=rooms)
     topics = Topic.objects.all()
 
+    #Authenticated 
     if request.user != rooms.host:
         return HttpResponse('You are not allowed here !')
 
