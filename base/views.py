@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 from django.db.models import Q
 from .models import Room, Topic, Message
-from .forms import RoomForm
+from .forms import RoomForm, UserForm
 
 
 
@@ -197,3 +197,18 @@ def deleteMessage(request, pk):
         return redirect('home')
 
     return render(request, 'base/delete.html', {'obj':message})
+
+
+
+@login_required(login_url="/login/")
+def updateUser(request):
+    user = request.user
+    form = UserForm(instance = user)
+
+    if request.method == 'POST':
+        form = UserForm(request.POST, instance=user)
+        if form.is_valid:
+            form.save()
+            return redirect('user-profile', pk=user.id)
+
+    return render(request, 'base/edit-user.html', {'form':form})
