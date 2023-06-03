@@ -3,6 +3,9 @@
 ### Introduction:
 Welcome to StudyTalk, a platform that aims to provide an easy-to-use and intuitive interface for students and teachers to collaborate and learn. With StudyTalk, you can create rooms for different subjects, join existing rooms, create topics, and chat with other members in real-time. This readme file will guide you through the installation and usage of StudyTalk.
 
+![image](https://github.com/Mehfooz201/StudyTalk---A-Django-based---Web-based-with-AI/assets/61369686/d9519371-f213-4415-8012-5fc763350729)
+
+
 ### Installation:
 To get started with StudyTalk, follow these steps:
 
