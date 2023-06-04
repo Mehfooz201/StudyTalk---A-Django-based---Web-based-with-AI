@@ -44,6 +44,10 @@ INSTALLED_APPS = [
     "corsheaders",
 ]
 
+
+AUTH_USER_MODEL = 'base.User'
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
 
@@ -129,6 +133,10 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
+
+#User Upload the contetns. images files
+MEDIA_URL = '/images/'
+MEDIA_ROOT = BASE_DIR / 'static/images'
 
 #user upload the images
 # STATIC_ROOT = 

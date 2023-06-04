@@ -24,9 +24,9 @@
       {% if request.user.is_authenticated %} 
       <!-- Logged In -->
       <div class="header__user">
-        <a href="#">
+        <a href="/">
           <div class="avatar avatar--medium active">
-            <img src="https://randomuser.me/api/portraits/men/37.jpg" />
+            <img src="{{request.user.avatar.url}}" />
           </div>
           <p>{{request.user.username}} <span>@{{request.user.username}}</span></p>
         </a>
