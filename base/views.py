@@ -93,22 +93,21 @@ def home(request):
                }
     return render(request, 'base/home.html', context)
 
-def rooms(request, pk):
-    rooms = Room.objects.get(id=pk)
-    room_messages = rooms.message_set.all().order_by('-created')
-    participants = rooms.participants.all()
-
+def room(request, pk):
+    room = Room.objects.get(id=pk)
+    room_messages = room.message_set.all() #.order_by('-created')
+    participants = room.participants.all()
 
     if request.method == 'POST':
         message = Message.objects.create(
             user = request.user,
-            rooms = rooms,
+            room = room,
             body = request.POST.get('body')
         )
-        rooms.participants.add(request.user)
-        return redirect('room', pk=rooms.id)
+        room.participants.add(request.user)
+        return redirect('room', pk=room.id)
 
-    context = {'rooms':rooms, 'room_messages':room_messages, 'participants':participants}
+    context = {'room':room, 'room_messages':room_messages, 'participants':participants}
     return render(request, 'base/room.html', context)
 
 
@@ -144,41 +143,40 @@ def createRoom(request):
 
 @login_required(login_url="/login/")
 def updateRoom(request, pk):
-    rooms = Room.objects.get(id=pk)
-    form = RoomForm(instance=rooms)
+    room = Room.objects.get(id=pk)
+    form = RoomForm(instance=room)
     topics = Topic.objects.all()
 
     #Authenticated 
-    if request.user != rooms.host:
+    if request.user != room.host:
         return HttpResponse('You are not allowed here !')
 
     if request.method == 'POST':
         topic_name = request.POST.get('topic')
         topic, created = Topic.objects.get_or_create(name=topic_name)
 
-        rooms.name = request.POST.get('name')
-        rooms.topic = topic
-        rooms.description = request.POST.get('description')
-        rooms.save()
-
-        
+        room.name = request.POST.get('name')
+        room.topic = topic
+        room.description = request.POST.get('description')
+        room.save()
         return redirect('home')
-    context = {'form':form, 'topics':topics}
+    
+    context = {'form':form, 'topics':topics, 'room':room}
     return render(request, 'base/room_form.html', context)
 
 
 @login_required(login_url="/login/")
 def deleteRoom(request, pk):
-    rooms = Room.objects.get(id=pk)
+    room = Room.objects.get(id=pk)
 
-    if request.user != rooms.host:
+    if request.user != room.host:
         return HttpResponse('You are not allowed here !')
     
     if request.method == 'POST':
-        rooms.delete()
+        room.delete()
         return redirect('home')
 
-    return render(request, 'base/delete.html', {'obj':rooms})
+    return render(request, 'base/delete.html', {'obj':room})
 
 
 

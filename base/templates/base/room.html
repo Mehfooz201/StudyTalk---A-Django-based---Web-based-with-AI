@@ -30,9 +30,9 @@
                 <h3>Study Room</h3>
               </div>
   
-              {% if rooms.host == request.user %}
+              {% if room.host == request.user %}
               <div class="room__topRight">
-                <a href="{% url 'update-room' rooms.id %}">
+                <a href="{% url 'update-room' room.id %}">
                   <svg
                     enable-background="new 0 0 24 24"
                     height="32"
@@ -59,7 +59,7 @@
                   </svg>
                 </a>
                 
-                <a href="{% url 'delete-room' rooms.id %}">
+                <a href="{% url 'delete-room' room.id %}">
                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                     <title>remove</title>
                     <path
@@ -75,22 +75,22 @@
             <div class="room__box scroll">
               <div class="room__header scroll">
                 <div class="room__info">
-                  <h3>{{rooms.name}}</h3>
-                  <span>{{rooms.created|timesince}} ago</span>
+                  <h3>{{room.name}}</h3>
+                  <span>{{room.created|timesince}} ago</span>
                 </div>
                 <div class="room__hosted">
                   <p>Hosted By</p>
-                  <a href="{% url 'user-profile' rooms.host.id %}" class="room__author">
+                  <a href="{% url 'user-profile' room.host.id %}" class="room__author">
                     <div class="avatar avatar--small">
-                      <img src="{{rooms.host.avatar.url}}" />
+                      <img src="{{room.host.avatar.url}}" />
                     </div>
-                    <span>@{{rooms.host.username}}</span>
+                    <span>@{{room.host.username}}</span>
                   </a>
                 </div>
-                <div class="room__details">
-                  {{rooms.description}}
-                </div>
-                <span class="room__topics">{{rooms.topic.name}}</span>
+                {% comment %} <div class="room__details">
+                  {{room.description}}
+                </div> {% endcomment %}
+                <span class="room__topics">{{room.topic}}</span>
               </div>
 
 
@@ -106,7 +106,7 @@
                           <div class="avatar avatar--small">
                             <img src="{{message.user.avatar.url}}" />
                           </div>
-                          <span>@{{message.user}}</span>
+                          <span>@{{message.user.username}}</span>
                         </a>
                         <span class="thread__date">{{message.created|timesince}} ago</span>
                       </div>
@@ -139,9 +139,9 @@
 
             {% if request.user.is_authenticated %}
                 <div class="room__message">
-                    <form action="" method='post'>
+                    <form action="" method='POST'>
                     {% csrf_token %}
-                        <input name="body" type="text" placeholder="Write your message here..." />
+                        <input name="body" placeholder="Write your message here..." />
                     </form>
                 </div>
             {% endif %}
@@ -172,5 +172,5 @@
         </div>
       </main>
 
-
+      <script src="script.js"></script>
 {% endblock content %}

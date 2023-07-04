@@ -22,7 +22,7 @@ class Topic(models.Model):
     name = models.CharField(max_length=200)
 
     def __str__(self):
-        return str(self.name)
+        return self.name
     
 class Room(models.Model):
     host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
@@ -38,7 +38,7 @@ class Room(models.Model):
         ordering = ['-updated', '-created']  
 
     def __str__(self):
-        return str(self.name)
+        return self.name
     
 
 class Message(models.Model):
@@ -53,4 +53,4 @@ class Message(models.Model):
         ordering = ['-updated', '-created']  
 
     def __str__(self):
-        return str(self.body[0:50])
+        return self.body[0:50]

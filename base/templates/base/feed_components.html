@@ -24,12 +24,14 @@
             <span>{{room.created|timesince}} ago</span>
         </div>
         </div>
+
         <div class="roomListRoom__content">
         <a href="{% url 'room' room.id %}">{{room.name}}</a>
-        <p>
+        <!-- <p>
             {{room.description}}
-        </p>
+        </p> -->
         </div>
+        
         <div class="roomListRoom__meta">
         <a href="{% url 'room' room.id %}" class="roomListRoom__joined">
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
